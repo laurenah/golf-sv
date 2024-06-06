@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    container_name: golf
+    working_dir: /usr/src/app
+    entrypoint: /bin/sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app
+    command: ["-c", "npm run dev"]

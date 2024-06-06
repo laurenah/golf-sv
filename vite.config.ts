@@ -4,10 +4,10 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
-		host: 'golf.test',
+		host: true,
 		port: 3000,
 	},
 	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
+		include: ['tests/**/*.{test,spec}.{js,ts}']
 	}
 });
