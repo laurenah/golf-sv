@@ -1,4 +1,4 @@
 build:
-	docker-compose -f docker-compose.yaml up --build -d
+	docker-compose -f compose.yaml up --build -d
 
 .PHONY: update-hosts build
