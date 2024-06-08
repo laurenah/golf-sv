@@ -1,4 +1,7 @@
-build:
+build: 
 	docker-compose -f compose.yaml up --build -d
 
-.PHONY: update-hosts build
+sh: 
+	docker exec -it golf /bin/sh
+
+.PHONY: build sh

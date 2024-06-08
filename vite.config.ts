@@ -8,6 +8,6 @@ export default defineConfig({
 		port: 3000,
 	},
 	test: {
-		include: ['tests/**/*.{test,spec}.{js,ts}']
+		include: ['tests/**/*.{test,spec}.{js,ts}'],
 	}
 });
