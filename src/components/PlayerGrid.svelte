@@ -1,12 +1,19 @@
 <script lang="ts">
 	import Card from './Card.svelte';
+	import type { Player } from '$lib/types';
+
+	export let player: Player;
 </script>
 
 <div class="grid">
-	<Card suit="♠" value={10} />
-	<Card suit="♦" value={5} />
-	<Card suit="♣" value={8} />
-	<Card suit="♥" value={3} />
+	{#each player.hand as card}
+		<Card 
+		suit={card.suit} 
+		value={card.value} 
+		known={card.known}
+		locked={card.locked}
+		/>
+	{/each}
 </div>
 
 <style>

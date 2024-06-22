@@ -1,11 +1,11 @@
 <script lang="ts">
-	import PlayerGrid from './components/PlayerGrid.svelte';
+	import Game from './components/Game.svelte';
 </script>
 
 <main>
 	<h1>Golf</h1>
 
-	<PlayerGrid />
+	<Game />
 </main>
 
 <style>
