@@ -16,14 +16,14 @@ describe('build', () => {
 
 	it('creates an array of 13 cards for each suit', async () => {
 		for (const suit of SUITS) {
-			const suitCards = deck.cards.filter(card => card.suit === suit);
+			const suitCards = deck.cards.filter((card) => card.suit === suit);
 			expect(suitCards).toHaveLength(13);
 		}
 	});
 
 	it('creates an array of 4 cards for each value', async () => {
 		for (const value of VALUES) {
-			const valueCards = deck.cards.filter(card => card.value === value);
+			const valueCards = deck.cards.filter((card) => card.value === value);
 			expect(valueCards).toHaveLength(4);
 		}
 	});
@@ -52,14 +52,14 @@ describe('shuffle', () => {
 	it('does not change the number of cards for each suit and each value', async () => {
 		shuffle(deck);
 		for (const suit of SUITS) {
-			const suitCards = deck.cards.filter(card => card.suit === suit);
-			const originalSuitCards = originalDeck.cards.filter(card => card.suit === suit);
+			const suitCards = deck.cards.filter((card) => card.suit === suit);
+			const originalSuitCards = originalDeck.cards.filter((card) => card.suit === suit);
 			expect(suitCards).toHaveLength(originalSuitCards.length);
 		}
 
 		for (const value of VALUES) {
-			const valueCards = deck.cards.filter(card => card.value === value);
-			const originalValueCards = originalDeck.cards.filter(card => card.value === value);
+			const valueCards = deck.cards.filter((card) => card.value === value);
+			const originalValueCards = originalDeck.cards.filter((card) => card.value === value);
 			expect(valueCards).toHaveLength(originalValueCards.length);
 		}
 	});
