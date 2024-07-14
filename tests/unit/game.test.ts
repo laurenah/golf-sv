@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { dealHands, setupGame } from '../../src/core/Game';
 import type { Game } from '$lib/types';
 import { gameStore } from '../../src/core/stores/gameStore';
@@ -48,7 +48,7 @@ describe('dealHands', () => {
     it('should deal 4 cards to each player using the store', async () => {
         const unsubscribe = gameStore.subscribe(state => game = state);
         
-		let initialTopCard = game.topCard;
+		const initialTopCard = game.topCard;
         expect(game.players).toHaveLength(2);
         expect(game.deck.cards).toHaveLength(52);
 
