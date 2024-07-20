@@ -45,21 +45,21 @@ describe('dealHands', () => {
 		gameStore.set(game);
 	});
 
-    it('should deal 4 cards to each player using the store', async () => {
-        const unsubscribe = gameStore.subscribe(state => game = state);
-        
+	it('should deal 4 cards to each player using the store', async () => {
+		const unsubscribe = gameStore.subscribe((state) => (game = state));
+
 		const initialTopCard = game.topCard;
-        expect(game.players).toHaveLength(2);
-        expect(game.deck.cards).toHaveLength(52);
+		expect(game.players).toHaveLength(2);
+		expect(game.deck.cards).toHaveLength(52);
 
-        dealHands();
+		dealHands();
 
-        expect(game.players[0].hand).toHaveLength(4);
-        expect(game.players[1].hand).toHaveLength(4);
-        expect(game.deck.cards).toHaveLength(44);
-        expect(game.topCard).not.toBe(initialTopCard);
-        expect(game.topCard).toBe(game.deck.cards[0]);
+		expect(game.players[0].hand).toHaveLength(4);
+		expect(game.players[1].hand).toHaveLength(4);
+		expect(game.deck.cards).toHaveLength(44);
+		expect(game.topCard).not.toBe(initialTopCard);
+		expect(game.topCard).toBe(game.deck.cards[0]);
 
-        unsubscribe();
-    });
+		unsubscribe();
+	});
 });

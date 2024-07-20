@@ -14,9 +14,8 @@ export const setupGame = (numComputers: number = 1): Game => {
 
 	const deck = build();
 
-	const computerPlayers = Array.from(
-		{ length: numComputers < 1 ? 1 : numComputers },
-		() => PlayerSchema.parse({})
+	const computerPlayers = Array.from({ length: numComputers < 1 ? 1 : numComputers }, () =>
+		PlayerSchema.parse({})
 	);
 
 	return {
@@ -28,16 +27,16 @@ export const setupGame = (numComputers: number = 1): Game => {
 };
 
 export const dealHands = (): void => {
-    gameStore.update(game => {
-        const modifiedGame = { ...game, deck: { ...game.deck, cards: [...game.deck.cards] } };
-        
-        modifiedGame.players = modifiedGame.players.map(player => {
-            const hand = modifiedGame.deck.cards.splice(0, 4);
-            return { ...player, hand };
-        });
-        
-        modifiedGame.topCard = modifiedGame.deck.cards[0];
-        
-        return modifiedGame;
-    });
+	gameStore.update((game) => {
+		const modifiedGame = { ...game, deck: { ...game.deck, cards: [...game.deck.cards] } };
+
+		modifiedGame.players = modifiedGame.players.map((player) => {
+			const hand = modifiedGame.deck.cards.splice(0, 4);
+			return { ...player, hand };
+		});
+
+		modifiedGame.topCard = modifiedGame.deck.cards[0];
+
+		return modifiedGame;
+	});
 };

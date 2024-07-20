@@ -13,10 +13,7 @@
 	}
 </script>
 
-<button class="card {face}" 
-	on:click={handleFlip}
-	style="transform: {rotation}"
-	>
+<button class="card {face}" on:click={handleFlip} style="transform: {rotation}">
 	<div class="face front {color}">
 		<div class="value">{value}</div>
 		<div class="suit">{suit}</div>
@@ -32,42 +29,43 @@
 	}
 
 	.card {
-        transform-style: preserve-3d;
-        transition: transform 0.6s;
-        position: relative;
-        width: 100px;
-        height: 140px;
-        cursor: pointer;
-        padding: 0.5em;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+		transform-style: preserve-3d;
+		transition: transform 0.6s;
+		position: relative;
+		width: 100px;
+		height: 140px;
+		cursor: pointer;
+		padding: 0.5em;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
-    .face {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
-    }
+	.face {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 5px;
+	}
 
-	.front, .back {
+	.front,
+	.back {
 		backface-visibility: hidden;
 	}
 
-    .front {
-        background-color: white;
-    }
+	.front {
+		background-color: white;
+	}
 
-    .back {
-        background-color: #ff6565;
-        transform: rotateY(180deg);
+	.back {
+		background-color: #ff6565;
+		transform: rotateY(180deg);
 		border: 10px solid white;
-    	box-sizing: border-box;
-    }
+		box-sizing: border-box;
+	}
 
 	.red {
 		color: #ff6565;
