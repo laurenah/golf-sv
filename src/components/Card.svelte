@@ -1,16 +1,20 @@
 <script lang="ts">
 	export let suit: string;
 	export let value: string;
-	export let known: boolean;
+	// export let known: boolean;
 	export let locked: boolean;
 
 	let color = suit === '♥' || suit === '♦' ? 'red' : 'black';
 	let face = locked ? 'up' : 'down';
 	$: rotation = locked ? 'rotateY(0deg)' : 'rotateY(180deg)';
+
+	function handleFlip() {
+		locked = true;
+	}
 </script>
 
 <button class="card {face}" 
-	on:click={() => (locked = !locked)}
+	on:click={handleFlip}
 	style="transform: {rotation}"
 	>
 	<div class="face front {color}">

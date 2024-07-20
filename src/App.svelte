@@ -3,8 +3,6 @@
 </script>
 
 <main>
-	<h1>Golf</h1>
-
 	<Game />
 </main>
 
@@ -14,9 +12,5 @@
 		flex-direction: column;
 		align-items: center;
 		padding: 20px;
-	}
-
-	h1 {
-		font-size: 2rem;
 	}
 </style>
