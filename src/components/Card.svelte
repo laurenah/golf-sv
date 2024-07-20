@@ -6,50 +6,70 @@
 
 	let color = suit === '♥' || suit === '♦' ? 'red' : 'black';
 	let face = locked ? 'up' : 'down';
+	$: rotation = locked ? 'rotateY(0deg)' : 'rotateY(180deg)';
 </script>
 
-<div class="card {color} {face}">
-	<div class="value">{value}</div>
-	<div class="suit">{suit}</div>
-</div>
+<button class="card {face}" 
+	on:click={() => (locked = !locked)}
+	style="transform: {rotation}"
+	>
+	<div class="face front {color}">
+		<div class="value">{value}</div>
+		<div class="suit">{suit}</div>
+	</div>
+	<div class="face back"></div>
+</button>
 
 <style>
-	.card {
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		width: 30px;
-		height: 70px;
-		background-color: white;
-		box-shadow: inset 0 0 0 10px white;
-		border-radius: 5px;
-		margin: 5px;
+	button:hover {
+		border: none;
+		transition: 0.6s;
+		transform: scale(1.1);
 	}
 
-	.card.red {
+	.card {
+        transform-style: preserve-3d;
+        transition: transform 0.6s;
+        position: relative;
+        width: 100px;
+        height: 140px;
+        cursor: pointer;
+        padding: 0.5em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 5px;
+    }
+
+	.front, .back {
+		backface-visibility: hidden;
+	}
+
+    .front {
+        background-color: white;
+    }
+
+    .back {
+        background-color: #ff6565;
+        transform: rotateY(180deg);
+		border: 10px solid white;
+    	box-sizing: border-box;
+    }
+
+	.red {
 		color: #ff6565;
 	}
 
-	.card.black {
+	.black {
 		color: black;
-	}
-
-	.card.down {
-		background-color: #ff6565;
-		background-size: cover;
-	}
-
-	.card.down .value,
-	.card.down .suit {
-		display: none;
-	}
-
-	.value {
-		font-size: 2rem;
-	}
-
-	.suit {
-		font-size: 1.5rem;
 	}
 </style>

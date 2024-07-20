@@ -1,5 +1,5 @@
 import { PLAYER_HUMAN } from '$lib/const';
-import { PlayerSchema, type Game, type Player } from '$lib/types';
+import { PlayerSchema, type Game } from '$lib/types';
 import { build } from './Deck';
 import { gameStore } from './stores/gameStore';
 
@@ -16,7 +16,7 @@ export const setupGame = (numComputers: number = 1): Game => {
 
 	const computerPlayers = Array.from(
 		{ length: numComputers < 1 ? 1 : numComputers },
-		(_, i): Player => PlayerSchema.parse({})
+		() => PlayerSchema.parse({})
 	);
 
 	return {
@@ -29,7 +29,7 @@ export const setupGame = (numComputers: number = 1): Game => {
 
 export const dealHands = (): void => {
     gameStore.update(game => {
-        let modifiedGame = { ...game, deck: { ...game.deck, cards: [...game.deck.cards] } };
+        const modifiedGame = { ...game, deck: { ...game.deck, cards: [...game.deck.cards] } };
         
         modifiedGame.players = modifiedGame.players.map(player => {
             const hand = modifiedGame.deck.cards.splice(0, 4);
