@@ -16,3 +16,22 @@ test('clicking new game button renders 2 groups of 4 cards', async ({ page }) =>
 	await page.locator('button').click();
 	await expect(page.locator('.card')).toHaveCount(8);
 });
+
+test('clicking a card flips it over', async ({ page }) => {
+    await page.goto('/');
+    await page.locator('button').click();
+    const firstCard = page.locator('.card').first();
+    await firstCard.click();
+
+    await expect(firstCard.locator('.front')).toBeVisible();
+});
+
+// test plan
+
+/**
+ * - cannot flip a card that is already flipped
+ * - asserting existence of deck and top card
+ * - cannot flip another player's card (this should break the 
+ * clicking a card flips it over test, that is player 0 flipping player 1's card)
+ * - moving towards once player 0 card flipped, player 1 flips a card
+ */
