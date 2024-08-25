@@ -25,4 +25,4 @@ jobs:
     - name: Build Docker Image
       run: docker build . --file Dockerfile --tag golf
     - name: Run Unit Tests
-      run: docker run --rm golf npm run test:unit
+      run: docker run --rm golf npm run test:unit -- --run
