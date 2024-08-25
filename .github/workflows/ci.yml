@@ -9,33 +9,20 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      id: build_image
-      run: |
-        IMAGE_TAG=golf:$(date +%s)
-        docker build . --file Dockerfile --tag $IMAGE_TAG
-        echo "::set-output name=image_tag::$IMAGE_TAG"
-    outputs:
-      image_tag: ${{ steps.build_image.outputs.image_tag }}
-  
   test-integration:
-    needs: build
-    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Playwright
-      run: docker run --rm ${{ needs.build.outputs.image_tag }} npm run test:integration
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag golf
+    - name: Run Integration Tests
+      run: docker run --rm golf npm run test:integration
 
   test-unit:
-    needs: build
-    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - name: Vitest
-      run: docker run --rm ${{ needs.build.outputs.image_tag }} npm run test:unit
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag golf
+    - name: Run Unit Tests
+      run: docker run --rm golf npm run test:unit
