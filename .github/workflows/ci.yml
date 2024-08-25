@@ -1,0 +1,28 @@
+name: Golf
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-integration:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag golf
+    - name: Run Integration Tests
+      run: docker run --rm golf npm run test:integration
+
+  test-unit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker Image
+      run: docker build . --file Dockerfile --tag golf
+    - name: Run Unit Tests
+      run: docker run --rm golf npm run test:unit -- --run
