@@ -20,7 +20,7 @@ export const setupGame = (numComputers: number = 1): Game => {
 
   return {
     deck: deck,
-    players: [PlayerSchema.parse({ type: PLAYER_HUMAN }), ...computerPlayers],
+    players: [...computerPlayers, PlayerSchema.parse({ type: PLAYER_HUMAN })],
     currentPlayer: 0,
     topCard: deck.cards[0]
   };

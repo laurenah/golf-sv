@@ -1,0 +1,39 @@
+name: Golf Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      id: build_image
+      run: |
+        IMAGE_TAG=golf:$(date +%s)
+        docker build . --file ../../Dockerfile --tag $IMAGE_TAG
+        echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+  
+  test-integration:
+    needs: build
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Playwright
+      run: docker run --rm ${{ env.IMAGE_TAG }} npm run test:integration
+
+  test-unit:
+    needs: build
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Vitest
+      run: docker run --rm ${{ env.IMAGE_TAG }} npm run test:unit

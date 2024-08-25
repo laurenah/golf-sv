@@ -14,7 +14,7 @@ test('clicking new game button renders 2 groups of 4 cards', async ({ page }) =>
 test('clicking a card flips it over', async ({ page }) => {
   await page.goto('/');
   await page.locator('button').click();
-  const playerGrid = page.locator('.grid').first();
+  const playerGrid = page.locator('.grid').last();
   const firstPlayerCard = playerGrid.locator('.card').first();
   await firstPlayerCard.click();
 
@@ -40,7 +40,7 @@ test('clicking a card flips it over', async ({ page }) => {
 test('cannot flip a card that is already flipped', async ({ page }) => {
   await page.goto('/');
   await page.locator('button').click();
-  const playerGrid = page.locator('.grid').first();
+  const playerGrid = page.locator('.grid').last();
   const firstPlayerCard = playerGrid.locator('.card').first();
   const transformation = 'matrix3d(-1, 0, 0, 0, 0, 1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1)';
 
@@ -74,7 +74,7 @@ test('cannot flip a card that is already flipped', async ({ page }) => {
 test('cannot flip opponent card due to pointer-events being none', async ({ page }) => {
   await page.goto('/');
   await page.locator('button').click();
-  const opponentGrid = page.locator('.grid').last();
+  const opponentGrid = page.locator('.grid').first();
 
   const pointerEvents = await opponentGrid.evaluate(
     (el) => window.getComputedStyle(el).pointerEvents
