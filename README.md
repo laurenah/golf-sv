@@ -1,4 +1,5 @@
 # Golf
+![](https://github.com/laurenah/golf-sv/actions/workflows/ci.yml/badge.svg)
 
 The Golf Card Game
 
@@ -12,6 +13,8 @@ npm run dev
 # or start the server and open the app in a new browser tab at golf.test:3000
 npm run dev -- --open
 ```
+
+or `make build` to run a docker container, and navigate to `golf.test:3000`
 
 ## How to play (TBI)
 
