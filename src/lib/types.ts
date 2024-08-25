@@ -15,16 +15,18 @@ const DeckSchema = z.object({
 const PlayerType = z.enum([PLAYER_HUMAN, PLAYER_COMPUTER]);
 
 export const PlayerSchema = z.object({
+  id: z.string(),
   hand: z.array(CardSchema).default([]),
   type: PlayerType.default(PLAYER_COMPUTER),
   score: z.number().default(0)
 });
 
-const GameSchema = z.object({
+export const GameSchema = z.object({
   deck: DeckSchema,
   players: z.array(PlayerSchema),
-  currentPlayer: z.number().default(0),
-  topCard: CardSchema.optional()
+  currentPlayer: z.number().optional(),
+  topCard: CardSchema.optional(),
+  state: z.string().optional()
 });
 
 export type Deck = z.infer<typeof DeckSchema>;

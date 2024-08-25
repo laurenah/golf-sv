@@ -8,4 +8,5 @@ services:
       - "3000:3000"
     volumes:
       - .:/usr/src/app
-    command: ["-c", "npm run dev"]
+      - /usr/src/app/node_modules
+    command: ["-c", "yarn install && yarn dev"]
