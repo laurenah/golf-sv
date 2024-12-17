@@ -74,7 +74,7 @@ describe('dealHands', () => {
     dealHands();
 
     const player = getComputerPlayer(game);
-    
+
     expect(player.hand).toHaveLength(4);
     expect(player.hand[0].known).toBe(true);
     expect(player.hand[1].known).toBe(true);
@@ -116,5 +116,7 @@ describe('peekCards', () => {
   });
 });
 
-const getHumanPlayer = (game: Game): Player => game.players.find((player) => player.type === 'human') ?? game.players[1];
-const getComputerPlayer = (game: Game): Player => game.players.find((player) => player.type === 'computer') ?? game.players[0];
+const getHumanPlayer = (game: Game): Player =>
+  game.players.find((player) => player.type === 'human') ?? game.players[1];
+const getComputerPlayer = (game: Game): Player =>
+  game.players.find((player) => player.type === 'computer') ?? game.players[0];

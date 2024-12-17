@@ -1,9 +1,9 @@
 <script lang="ts">
-    import type { Card } from "$lib/types";
+  import type { Card } from '$lib/types';
 
   export let suit: string;
   export let value: string;
-  export const known: boolean = false;
+  export let known: boolean = false;
   export let locked: boolean;
   export let canPeek: boolean = false;
   export let onPeek: (card: Card) => void;
@@ -16,7 +16,6 @@
     if (canPeek) {
       locked = true;
       onPeek({ suit: suit, value: value, locked: locked, known: known });
-      locked = false;
     }
 
     locked = true;

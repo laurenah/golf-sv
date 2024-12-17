@@ -1,8 +1,10 @@
 <script lang="ts">
+  import { GAME_STATES } from '$lib/const';
   import { gameStore } from '../core/stores/gameStore';
 
   $: game = $gameStore;
   $: topCard = game.topCard;
+  $: indicatePickup = game.currentPlayer === 1 && game.state === GAME_STATES.PLAYING;
 
   let color = topCard
     ? topCard.suit === '♥' || topCard.suit === '♦'
@@ -11,11 +13,11 @@
     : 'black';
 </script>
 
-<button class="deck" on:click={undefined}>
+<button class="deck {indicatePickup ? 'glow' : ''}" on:click={undefined}>
   <div class="face"></div>
 </button>
 
-<button class="topcard">
+<button class="topcard {indicatePickup ? 'glow' : ''}">
   <div class="face {color}">
     <div class="value">{topCard ? topCard.value : '?'}</div>
     <div class="suit">{topCard ? topCard.suit : '?'}</div>
@@ -70,5 +72,22 @@
 
   .black {
     color: black;
+  }
+
+  @keyframes pulseGlow {
+    0% {
+      box-shadow: 0 0 15px 2px rgba(240, 240, 240, 0.8);
+    }
+    50% {
+      box-shadow: 0 0 25px 3px rgba(240, 240, 240, 0.7);
+    }
+    100% {
+      box-shadow: 0 0 15px 2px rgba(240, 240, 240, 0.8);
+    }
+  }
+
+  .glow {
+    box-shadow: 0 0 15px 3px rgba(240, 240, 240, 0.8);
+    animation: pulseGlow 1.5s infinite;
   }
 </style>

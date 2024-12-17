@@ -61,12 +61,15 @@ export const peekCards = (player: Player, cards: Card[]): void => {
     const updatedPlayer = { ...playerToUpdate, hand: [...playerToUpdate.hand] };
 
     cards.forEach((card) => {
-      const cardIndex = updatedPlayer.hand.findIndex((c) => c.suit === card.suit && c.value === card.value);
+      const cardIndex = updatedPlayer.hand.findIndex(
+        (c) => c.suit === card.suit && c.value === card.value
+      );
       updatedPlayer.hand[cardIndex].known = true;
     });
 
     modifiedGame.players[playerIndex] = updatedPlayer;
     modifiedGame.state = GAME_STATES.PLAYING;
+    modifiedGame.currentPlayer = modifiedGame.players.findIndex((p) => p.type === PLAYER_HUMAN);
 
     return modifiedGame;
   });
