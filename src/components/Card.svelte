@@ -1,14 +1,24 @@
 <script lang="ts">
+    import type { Card } from "$lib/types";
+
   export let suit: string;
   export let value: string;
-  // export let known: boolean;
+  export const known: boolean = false;
   export let locked: boolean;
+  export let canPeek: boolean = false;
+  export let onPeek: (card: Card) => void;
 
   let color = suit === '♥' || suit === '♦' ? 'red' : 'black';
   let face = locked ? 'up' : 'down';
   $: rotation = locked ? 'rotateY(0deg)' : 'rotateY(180deg)';
 
   function handleFlip() {
+    if (canPeek) {
+      locked = true;
+      onPeek({ suit: suit, value: value, locked: locked, known: known });
+      locked = false;
+    }
+
     locked = true;
   }
 </script>

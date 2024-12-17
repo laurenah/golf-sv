@@ -14,7 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build Docker Image
-      run: docker build . --file Dockerfile --tag golf
+      run: |
+        docker build . --file Dockerfile --tag golf
+        docker run --rm golf
+        npx playwright install --with-deps
     - name: Run Integration Tests
       run: docker run --rm golf npm run test:integration
 

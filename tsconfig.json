@@ -10,8 +10,10 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "bundler",
-    "useDefineForClassFields": true
-  }
+    "useDefineForClassFields": true,
+    "types": ["svelte"]
+  },
+  "include": ["src/**/*", "src/node_modules/@types"],
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   // except $lib which is handled by https://kit.svelte.dev/docs/configuration#files
   //
