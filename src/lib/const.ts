@@ -3,7 +3,7 @@ export const VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', '
 export const PLAYER_HUMAN = 'human';
 export const PLAYER_COMPUTER = 'computer';
 export const GAME_STATES = {
-    PEEKING: 'peeking',
-    PLAYING: 'playing',
-    GAME_OVER: 'game-over'
+  PEEKING: 'peeking',
+  PLAYING: 'playing',
+  GAME_OVER: 'game-over'
 };

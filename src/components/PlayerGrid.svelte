@@ -3,7 +3,7 @@
   import type { Card as CardType, Player } from '$lib/types';
   import { GAME_STATES, PLAYER_HUMAN } from '$lib/const';
   import { gameStore } from '../core/stores/gameStore';
-    import { peekCards } from '../core/Game';
+  import { peekCards } from '../core/Game';
 
   $: game = $gameStore;
 
@@ -37,13 +37,13 @@
 
   <div class="grid {peekedCards.length === 2 ? 'disabled' : ''}">
     {#each player.hand as card}
-    <Card 
-        suit={card.suit} 
-        value={card.value} 
-        locked={card.locked} 
-        known={peekedCards.some(c => c.suit === card.suit && c.value === card.value)} 
-        canPeek={game.state === GAME_STATES.PEEKING && player.type === PLAYER_HUMAN} 
-        onPeek={handlePeek} 
+      <Card
+        suit={card.suit}
+        value={card.value}
+        locked={card.locked}
+        known={peekedCards.some((c) => c.suit === card.suit && c.value === card.value)}
+        canPeek={game.state === GAME_STATES.PEEKING && player.type === PLAYER_HUMAN}
+        onPeek={handlePeek}
       />
     {/each}
   </div>

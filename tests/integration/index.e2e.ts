@@ -1,4 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { test, expect } from '@playwright/test';
+
+test.beforeEach(async ({ page }) => {
+  // Override `setTimeout` globally in the browser context
+  await page.addInitScript(() => {
+    const mockSetTimeout = (handler: TimerHandler, timeout?: number, ...args: any[]) => {
+      if (typeof handler === 'function') {
+        handler(...args);
+      }
+      return 0;
+    };
+
+    (mockSetTimeout as any).__promisify__ = () => Promise.resolve();
+    window.setTimeout = mockSetTimeout as typeof setTimeout;
+  });
+});
 
 test('home page renders a new game button', async ({ page }) => {
   await page.goto('/');
@@ -25,8 +41,6 @@ test('clicking a card flips it over', async ({ page }) => {
 
 /**
  * ## CARD
- * - cannot flip another player's card (this should break the
- * clicking a card flips it over test, that is player 0 flipping player 1's card)
  * - moving towards once player 0 card flipped, player 1 flips a card
  * ## SCORE
  * - sidebar to display score
@@ -87,4 +101,18 @@ test('game displays deck and top card', async ({ page }) => {
   await page.locator('button').click();
   await expect(page.locator('.deck')).toBeVisible();
   await expect(page.locator('.topcard')).toBeVisible();
+});
+
+test('deck and topcard indicate when player needs to pick up', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('button').click();
+  const playerGrid = page.locator('.grid').last();
+  const firstPlayerCard = playerGrid.locator('.card').first();
+  const secondPlayerCard = playerGrid.locator('.card').nth(1);
+  // Peek the cards
+  await firstPlayerCard.click();
+  await secondPlayerCard.click();
+
+  await expect(page.locator('.deck')).toHaveClass(/glow/);
+  await expect(page.locator('.topcard')).toHaveClass(/glow/);
 });
